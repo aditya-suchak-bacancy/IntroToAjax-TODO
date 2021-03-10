@@ -25,7 +25,8 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: "Task was successfully created." }
+        format.js
+        format.html { redirect_to root_path, notice: "Task was successfully created." } 
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -49,10 +50,13 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
+    @task = Task.find(params[:id])
     @task.destroy
     respond_to do |format|
+      format.js 
       format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
       format.json { head :no_content }
+          
     end
   end
 
@@ -67,3 +71,6 @@ class TasksController < ApplicationController
       params.require(:task).permit(:name)
     end
 end
+# respond_to do |format|   
+#   format.html { redirect_to item_url }   
+#   format.json { head :no_content }   
