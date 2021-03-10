@@ -1,13 +1,9 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[edit update destroy ]
 
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
-  end
-
-  # GET /tasks/1 or /tasks/1.json
-  def show
   end
 
   # GET /tasks/new
@@ -39,7 +35,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: "Task was successfully updated." }
+        format.html { redirect_to root_path, notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
